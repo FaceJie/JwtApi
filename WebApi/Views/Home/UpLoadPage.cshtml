@@ -1,0 +1,640 @@
+﻿
+@{
+    ViewBag.Title = "易去对外API服务界面";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>易去对外API服务界面</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="对外API">
+    <meta name="description" content="易去旅行">
+    <!-- Mobile Specific Meta-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--All Css-->
+    <link href="~/Content/bootstrap2.3/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap2.3/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrapTable/bootstrap-table.css" rel="stylesheet" />
+
+
+    <link href="~/Content/bootstrap2.3/css/admin.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap2.3/css/pintuer.css" rel="stylesheet" />
+
+    <link href="~/Content/bootstrap2.3/css/style.css" rel="stylesheet" />
+
+    <!--轮播图 滑块：设置、动态字、静态字-->
+    <link href="~/Content/bootstrap2.3/css/settings.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap2.3/css/dynamic-captions.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap2.3/css/static-captions.css" rel="stylesheet" />
+
+    <!--Jquery-->
+    <script src="~/Content/bootstrap2.3/js/jQuery.js"></script>
+    <script src="~/Content/bootstrap2.3/js/jquery-3.2.1.js"></script>
+    <script src="~/Content/bootstrap2.3/js/jquery.form.js"></script>
+
+    <!--table-->
+    <script src="~/Content/bootstrap2.3/js/bootstrap.js"></script>
+    <script src="~/Content/bootstrapTable/bootstrap-table.js"></script>
+    <script src="~/Content/bootstrapTable/bootstrap-table-zh-CN.js"></script>
+
+    <script src="~/Content/bootstrap2.3/js/pintuer.js"></script>
+    <script src="~/Content/bootstrap2.3/js/jquery.cookie.js"></script>
+    <style>
+        .search-bar {
+            padding-left: 10px;
+            max-width: 75%;
+            background: rgba(238, 238, 238, 0.75);
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+
+            .search-bar li {
+                margin-bottom: 15px;
+                margin-top: 15px;
+            }
+
+        .table-th th {
+            text-align: center;
+        }
+
+        blockquote {
+            padding: 5px !important;
+            font-style: normal !important;
+            border-color: #0ae;
+        }
+
+        .blockquote-color {
+            border-color: #0ae !important;
+            background-color: #0ae !important;
+        }
+        .rev_slider_1_1{
+            background:url("../../Content/bootstrap2.3/images/depositphotos_background.jpg") no-repeat;
+            background-position:center center;
+            background-size:cover;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        $(function () {
+            debugger
+            //if ($.cookie('token') == undefined ||$.cookie('token') == null || $.cookie('token')=="") {
+            //    if (confirm('非法操作，请登录授权！?')) {
+            //        window.location.href = "/Home/Index";
+            //    } else {
+            //        window.location.href = "/Home/Index";
+            //    }
+            //} else {
+            //    $('input[name=token]').val($.cookie('token'));
+            //}
+        })
+
+    </script>
+    <div class="body-innerwrapper">
+        <!--顶部栏-->
+        <section id="sp-top-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 top-base no-padding">
+                        <div class="col-sm-6 top-block">
+                            <p>
+                                <i class="fa fa-bell"></i>
+                                快乐出行，&nbsp;尽在易去旅行！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+
+        </script>
+        <!--logo栏-->
+        <section id="sp-top-bar">
+            <div class="container">
+                <div class="row">
+                    <div id="sp-logo" class="col-sm-3 col-md-3">
+                        <a class="logo main-heading" href="#">
+                            <img class="sp-default-logo " src="~/Content/bootstrap2.3/images/easygo.png" alt="EsayGo">
+                        </a>
+                    </div>
+                    <div id="sp-top2" class="col-sm-9 col-md-9 hidden-xs">
+                        <ul class="sp-contact-info">
+                            <li class="sp-contact-time">
+                                <i class="fa fa-clock-o"></i>
+                                <p class="contact-content">
+                                    <span class="title">当前时间</span>
+                                    <span class="time" id="time">0000/00/00 00:00</span>
+                                    <script>
+                                        showTime();
+                                        function showTime() {
+                                            var today = new Date();
+                                            var year = today.getFullYear();
+                                            var month = today.getMonth() + 1;
+                                            var day = today.getDate();
+                                            var hours = today.getHours();
+                                            var minutes = today.getMinutes();
+                                            var seconds = today.getSeconds();
+                                            //如果是单个数，则前面补0
+                                            month = month < 10 ? "0" + month : month;
+                                            day = day < 10 ? "0" + day : day;
+                                            hours = hours < 10 ? "0" + hours : hours;
+                                            minutes = minutes < 10 ? "0" + minutes : minutes;
+                                            seconds = seconds < 10 ? "0" + seconds : seconds;
+                                            var str = year + "/" + month + "/" + day + "/ " + hours + ":" + minutes + ":" + seconds;
+                                            document.getElementById("time").innerHTML = str;
+                                            window.setTimeout("showTime()", 1000);
+                                        }
+                                    </script>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--轮播图-->
+        <section id="banner">
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="rev_slider_1_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
+                         style="margin:0px auto;background-color:#E9E9E9;padding:0px;margin-top:0px;margin-bottom:0px;max-height:550px;">
+                        <div id="rev_slider_1_1" class="rev_slider fullwidthabanner rev_slider_1_1"
+                             style="display:block;max-height:550px;height:550px;">
+
+                           
+                            <div class="tp-bannertimer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--====== 介绍==========-->
+        <section>
+            <div class="ho-popu tb-space pad-bot-redu">
+                <div class="rows container">
+
+                    <div class="spe-title">
+                        <h2>快捷 <span>精准</span> 简单</h2>
+                        <div class="title-line">
+                            <div class="tl-1"></div>
+                            <div class="tl-2"></div>
+                            <div class="tl-3"></div>
+                        </div>
+                        <p>快捷、专业、一条龙，足不出户</p>
+                    </div>
+
+                    <div class="col-md-12" style="position:relative;">
+                        <div class="hot-page2-hom-pre-head">
+                            <h4>签证快捷<span>查询入口</span><i class="fa fa-fire"></i></h4>
+                        </div>
+                        <div class="panel admin-panel">
+                            <div class="hot-page2-hom-pre">
+                                <ul class="hotul">
+                                    <!--举例条目-->
+                                    <li>
+                                        <div class="hot-page2-hom-pre-2">
+                                            <h5>
+                                                <!--内容-->
+                                                <i class="fa fa-comment"></i><span class="comment"> 查询须知： </span><br />
+                                                <i class="fa fa-book"></i><span class="danger"> 一、表格查询为订单的大致信息，详细信息请点击详情按钮查看；</span><br />
+                                                <i class="fa fa-book"></i><span class="danger"> 二、请确保查询条件中不包含错别字；</span><br />
+                                                <i class="fa fa-book"></i><span class="danger"> 三、本接口不采用模糊查询，数据量过大；</span><br />
+                                            </h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="padding border-bottom">
+                                <ul class="search search-bar" style="position:relative;">
+
+                                    <li><h4>客户姓名：</h4></li>
+                                    <li>
+                                        <input type="text" placeholder="请输入客户姓名" name="clientName" class="input keyText" style="width:250px; line-height:17px;display:inline-block" />
+
+                                    </li>
+                                    <li><h4>客人姓名：</h4></li>
+                                    <li>
+                                        <input type="text" placeholder="请输入客人姓名" name="customerName" class="input keyText" style="width:250px; line-height:17px;display:inline-block" />
+
+                                    </li>
+                                    <li style="top:65px;left:10px;position:absolute;"><h4>护 照 号：</h4></li>
+                                    <li style="margin-left:98px;">
+                                        <input type="text" placeholder="请输入护照号" name="passportNo" class="input keyText" style="width:250px; line-height:17px;display:inline-block" />
+
+                                    </li>
+                                    <li><h4>办理国家：</h4></li>
+                                    <li>
+                                        <input type="text" placeholder="请输入办理国家" name="country" class="input keyText" style="width:250px; line-height:17px;display:inline-block" />
+                                        <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()">查询</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--table-->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table id="table_server"></table>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--====== 办理栏 ==========-->
+        <section>
+            <div class="ho-popu tb-space pad-bot-redu">
+                <div class="rows container">
+
+                    <div class="col-md-12" style="position:relative;">
+                        <div class="hot-page2-hom-pre-head">
+                            <h4>签证快捷<span>办理入口</span><i class="fa fa-fire"></i></h4>
+                        </div>
+                        <div class="panel admin-panel">
+                            <div class="hot-page2-hom-pre">
+                                <ul class="hotul">
+                                    <!--举例条目-->
+                                    <li>
+                                        <div class="hot-page2-hom-pre-2">
+                                            <h5>
+                                                <!--说明内容-->
+                                                <i class="fa fa-comment"></i><span class="comment"> 上传须知： </span><br />
+                                                <i class="fa fa-book"></i><span class="danger"> 一、办理签证请填写正确的信息，订单不可在线修改，修改需联系客服；</span><br />
+                                                <i class="fa fa-book"></i><span class="danger"> 二、提交前请确认国家；</span><br />
+                                                <i class="fa fa-book"></i><span class="danger"> 三、办理类型分为：个签、团签、自由行；</span><br />
+                                                <i class="fa fa-book"></i><span class="danger"> 四、上传图片时请把多张护照图片放在一张图片中，便于保存；</span><br />
+                                            </h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <form class="form-horizontal" action="/Page/VisaInfo/CreateOrder" method="post" id="UploadForm" enctype="multipart/form-data">
+
+                                <div class="row form-group">
+                                    <label class="control-label col-lg-3 col-md-3" for="country_b">* 办理国家：</label>
+                                    <div class="field col-lg-6 col-md-6">
+                                        <input type="hidden" name="token">
+                                        <input type="text" class="form-control" name="country_b" data-validate="required:请输入办理国家" />
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <label class="control-label col-lg-3 col-md-3" for="types">* 办理类型：</label>
+                                    <div class="field col-lg-6 col-md-6">
+                                        <input type="text" class="form-control" name="types" data-validate="required:个签、团队、自由行" />
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <label class="control-label col-lg-3 col-md-3" for="count">* 办理人数：</label>
+                                    <div class="field col-lg-6 col-md-6">
+                                        <input type="number" class="form-control" name="count" data-validate="required:请输入办理人数" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3 col-md-3" for="count">* 护照图片：</label>
+                                    <div class="field col-lg-6 col-md-6">
+                                        <input type="text" id="fileurl" name="fileurl" class="col-lg-10 col-md-10" style="float:left;" data-toggle="hover" data-place="right" />
+                                        <input type="button" class="select-btn col-lg-2 col-md-2" onclick="myfile.click();" value="选择图片">
+                                        <input type="file" name="file" id="myfile" onchange="fileurl.value=this.value" style="display: none;float: left;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3 col-md-3" for="count"></label>
+                                    <div class="field col-lg-6 col-md-6" style="padding:30px;">
+                                        <input type="submit" class="select-btn col-lg-12 col-md-12" value="提交">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--底部：信息-->
+        <section id="sp-bottom">
+            <div class="container">
+                <div class="row">
+                    <div id="sp-bottom1" class="col-sm-6 col-md-6">
+                        <h3 class="sp-module-title">关于公司</h3>
+                        <ul class="textwidget">
+                            <li>
+                                <i class="fa fa-map-marker"><i class="hidden">地址</i></i>
+                                <span class="wsAddress">武侯区人民南路3号来福士广场T2 27楼2704 </span>
+                            </li>
+                            <li><i class="fa fa-envelope"></i> <span class="wsEmail">524871852@qq.com</span></li>
+                            <li><i class="fa fa-phone"></i> <span class="wsPhone">028-86202329</span></li>
+                        </ul>
+                    </div>
+
+                    <div id="sp-bottom2" class="col-sm-4 col-md-4">
+                        <h3 class="sp-module-title">公司关键词</h3>
+                        <div class="tagspopular">
+                            <ul class="sitekeyul">
+                                <li>
+                                    <a>
+                                        签证服务
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        旅游服务
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        急速办签
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        电子商务
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        度假规划
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--底部：版权-->
+        <footer id="sp-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <p><span class="wsFootor">Copyright &copy;2018易去成都</span></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <div class="modal" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" style="" onclick="HideM" data-dismiss="modal"></button>
+                        <h4 class="modal-title">签证办理详情</h4>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary blockquote-color" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--All Script-->
+        <script src="~/Content/bootstrap2.3/js/jquery.1.11.1.min.js"></script>
+        <script src="~/Content/bootstrap2.3/js/bootstrap.js"></script>
+        <script src="~/Content/bootstrap2.3/js/bootstrap-paginator.js"></script>
+
+        <script src="~/Content/bootstrap2.3/js/jquery.themepunch.tools.min.js"></script>
+        <script src="~/Content/bootstrap2.3/js/jquery.themepunch.revolution.min.js"></script>
+
+        <script src="~/Content/bootstrap2.3/js/banner.js"></script>
+    </div>
+
+    <script type="text/javascript">
+        //搜索
+        $(function () {
+            LoadTable();
+
+        })
+        function HideM() {
+            $("#mymodal-data").modal({
+                show: false
+            });
+        }
+        $("#UploadForm").submit(function () {
+            debugger
+            $(this).find('input[data-validate],textarea[data-validate],select[data-validate]').trigger("blur");
+            $(this).find('input[placeholder],textarea[placeholder]').each(function () { $hideplaceholder($(this)); });
+            var numError = $(this).find('.check-error').length;
+            if (numError) {
+                $(this).find('.check-error').first().find('input[data-validate],textarea[data-validate],select[data-validate]').first().focus().select();
+                return false;
+            }
+            $(this).ajaxSubmit({
+                headers: { "token": $('input[name=token]').val() },
+                success: function (data) {
+                    debugger
+                    //data = JSON.parse(data);
+                    if (data.scu) {
+                        alert(data.msg);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+            return false;
+        });
+        function LoadTable() {
+            var t = $("#table_server").bootstrapTable({
+                url: '/Page/VisaInfo/GetVisaInfoByPage',
+                method: 'get',
+                dataType: "json",
+                striped: true,//设置为 true 会有隔行变色效果
+                undefinedText: "空",//当数据为 undefined 时显示的字符
+                pagination: true, //分页
+                paginationLoop: false,//设置为 true 启用分页条无限循环的功能。
+                showToggle: false,//是否显示 切换试图（table/card）按钮
+                showColumns: false,//是否显示 内容列下拉框
+                pageNumber: 1,//如果设置了分页，首页页码
+                pageSize: 10,//如果设置了分页，页面数据条数
+                paginationPreText: '《',//指定分页条中上一页按钮的图标或文字,这里是<
+                paginationNextText: '》',//指定分页条中下一页按钮的图标或文字,这里是>
+                singleSelect: true,//设置True 将禁止多选
+                search: false, //显示搜索框
+                data_local: "zh-US",//表格汉化
+                sidePagination: "server", //服务端处理分页
+                queryParams: function (params) {//自定义参数，这里的参数是传给后台的，我这是是分页用的
+                    return {//这里的params是table提供的
+                        pageNum: params.offset == 0 ? 1 : params.offset / params.limit + 1,//从数据库第几条记录开始
+                        pageSize: params.limit,//找多少条
+                        clientName: $('input[name=clientName]').val(),
+                        customerName: $('input[name=customerName]').val(),
+                        passportNo: $('input[name=passportNo]').val(),
+                        country: $('input[name=country]').val(),
+                    };
+                },
+                responseHandler: function (res) {
+                    debugger
+                    if (res) {
+                        var obj = {
+                            "page": 10,
+                            "total": res.total,
+                            "rows": res.rows,
+                        };
+                    }else {
+                        var obj = {
+                            "page": 0,
+                            "total": 0,
+                            "rows": [],
+                        }
+                    }
+                    return obj;
+                },
+                idField: "PassportNo",//指定主键列
+
+                columns: [
+                    {
+                        title: '客户姓名',//表的列名
+                        field: 'client',//json数据中rows数组中的属性名
+                        align: 'center'//水平居中
+                    },
+                    {
+                        title: '客人姓名',
+                        field: 'Name',
+                        align: 'center'
+                    },
+                    {
+                        title: '客人护照号',
+                        field: 'PassportNo',
+                        align: 'center'
+                    },
+                    {
+                        //EMAIL
+                        title: '签证类型',
+                        field: 'Types',
+                        align: 'center'
+                    },
+                    {
+                        //部门名字
+                        title: '办理国家',
+                        field: 'Country',//可以直接取到属性里面的属性，赞
+                        align: 'center'
+                    },
+                    {
+                        title: '详情',
+                        field: 'PassportNo',
+                        align: 'center',
+                        formatter: function (value, row, index) {//自定义显示可以写标签哦~
+
+                            return `<div class ="button-group">
+                                        <a class ="button border-red" href="javascript:void(0)" data-groupno= `+ row.GroupNo + ` data-passportno= ` + row.PassportNo + `
+                                data-realtime= `+ row.RealTime + ` data-finishtime= ` + row.FinishTime + ` data-client= ` + row.client + ` data-name= ` + row.Name + ` data-englishname= ` + row.EnglishName + ` data-sex= ` + row.Sex + `
+                                data-birthday= `+ row.Birthday + ` data-entrytime= ` + row.EntryTime + ` data-types= ` + row.Types + `
+                                           onclick= "DetailSelect(this);" >
+                                            <span class ="icon-delicious">查看</span>
+                                        </a>
+                                    </div> `;
+                        }
+                    }
+
+                ]
+            });
+            t.on('load-success.bs.table', function (data) {//table加载成功后的监听函数
+                console.log("load success");
+                $(".pull-right").css("display", "block");
+            });
+        }
+        function changesearch() {
+            $.ajax({
+                url: '/Page/VisaInfo/GetVisaInfoByPage',
+                type: 'GET',
+                async: true,
+                headers: { "token": $('input[name=token]').val() },
+                data: {
+                    pageNum: "1",
+                    pageSize: "10",
+                    clientName: $('input[name=clientName]').val(),
+                    customerName: $('input[name=customerName]').val(),
+                    passportNo: $('input[name=passportNo]').val(),
+                    country: $('input[name=country]').val(),
+                },
+                contentType: 'application/json',
+                success: function (json) {
+                    debugger
+                    if (json == "") {
+                        //刷新表格
+                        var obj = {
+                            "page": 0,
+                            "total": 0,
+                            "rows": [],
+                        }
+                        $("#table_server").bootstrapTable('load', obj);
+
+                    } else{
+                        json = JSON.parse(json);
+                        //刷新表格
+                        var obj = {
+                            "page": json.page,
+                            "total": json.total,
+                            "rows": json.rows,
+                        }
+                        $("#table_server").bootstrapTable('load', obj);
+                    }
+                },
+                fail: function (json) {
+                    console.log(json)
+                }
+            });
+        }
+        //展示详情
+        function DetailSelect(e) {
+            $("#mymodal-data").modal();
+            var $modal = $("#mymodal-data");
+            $modal.find('.modal-body').html(
+                  ` <blockquote> 团 号：` + e.dataset.groupno + `</blockquote>
+                      <blockquote> 客户姓名：` + e.dataset.client + ` </blockquote>
+                      <blockquote> 客人姓名：` + e.dataset.name + ` </blockquote>
+                      <blockquote> 客人英文姓名：` + e.dataset.englishname + ` </blockquote>
+                      <blockquote> 客户性别：` + e.dataset.sex + ` </blockquote>
+                      <blockquote> 客户生日：` + ConvertDataTime(e.dataset.birthday) + ` </blockquote>
+                      <blockquote> 护照号：` + e.dataset.passportno + ` </blockquote>
+                      <blockquote> 签证类型：` + e.dataset.types + ` </blockquote>
+                      <blockquote> 实际进签时间：` + ConvertDataTime(e.dataset.realtime) + ` </blockquote>
+                      <blockquote> 出签时间：` + ConvertDataTime(e.dataset.finishtime) + ` </blockquote>
+                    `
+                  );
+            var $modal_dialog = $modal.find('.modal-dialog');
+            var m_top = (document.documentElement.clientHeight - $modal_dialog.height()) / 2;
+            $modal_dialog.css({ 'margin': m_top + 'px auto' });
+        }
+        function ConvertDataTime(str) {
+            debugger
+            if (str == "" || str == null || str == "null") {
+                return "请持续关注办理进度";
+            }
+            var date = new Date();
+            date.setTime(str.replace("/Date(", "").replace(")/", ""));
+            return date.Format("yyyy-MM-dd hh:mm:ss")
+        }
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1,                 //月份
+                "d+": this.getDate(),                    //日
+                "h+": this.getHours(),                   //小时
+                "m+": this.getMinutes(),                 //分
+                "s+": this.getSeconds(),                 //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds()             //毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+    </script>
+</body>
+</html>
