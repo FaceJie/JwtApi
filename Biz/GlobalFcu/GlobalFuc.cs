@@ -264,6 +264,16 @@ namespace WebHelper
             if (page == 0) { page += 1; }
             return page;
         }
+
+        /**
+        * 根据当前系统时间加随机序列来生成订单号
+        * @return 订单号
+       **/
+        public static string GenerateOrderNo()
+        {
+            Random ran = new Random();
+            return string.Format("U{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), ran.Next(999));
+        }
         #endregion
 
 #if 返回页面Tree

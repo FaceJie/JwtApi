@@ -124,6 +124,7 @@ $(function () {
         $pintu = value.replace(/(^\s*)|(\s*$)/g, "");
         switch (type) {
             case "required": return /[^(^\s*)|(\s*$)]/.test($pintu); break;
+            case "cs": return /^1[34578]\d{9}$/.test($pintu); break;
             case "chinese": return /^[\u0391-\uFFE5]+$/.test($pintu); break;
             case "number": return /^\d+$/.test($pintu); break;
             case "integer": return /^[-\+]?\d+$/.test($pintu); break;
@@ -185,36 +186,79 @@ $(function () {
                 }
         }
     };
-    $("#AjaxForm").submit(function () {
-        $(this).find('input[data-validate],textarea[data-validate],select[data-validate]').trigger("blur");
-        $(this).find('input[placeholder],textarea[placeholder]').each(function () { $hideplaceholder($(this)); });
-        var numError = $(this).find('.check-error').length;
+
+
+    //登录加验证
+
+    $("#ajaxForm_Btn").on("click", function () {
+        debugger
+        $("#ajaxForm").find('input[data-validate],textarea[data-validate],select[data-validate]').trigger("blur");
+        $("#ajaxForm").find('input[placeholder],textarea[placeholder]').each(function () { $hideplaceholder($("#ajaxForm")); });
+        var numError = $("#ajaxForm").find('.check-error').length;
+
         if (numError) {
-            $(this).find('.check-error').first().find('input[data-validate],textarea[data-validate],select[data-validate]').first().focus().select();
+            $("#ajaxForm").find('.check-error').first().find('input[data-validate],textarea[data-validate],select[data-validate]').first().focus().select();
             return false;
         }
-        $(this).ajaxSubmit({
-            success: function (data) {
-                if (data.Success) {
-                    debugger
-                    var queryType = $("#queryType option:selected").val();;
+        var queryType = $("#queryType option:selected").val();
+        var userName = $("input[name=userName]").val();
+        var password = $("input[name=password]").val();
+        $.ajax({
+            url: '/Home/queryUser',
+            type: 'GET',
+            data: {
+                queryType: queryType,
+                userName: userName,
+                password: password
+            },
+            contentType: 'application/json',
+            success: function (json) {
+                if (json.Success) {
                     if (queryType == 1 || queryType == "1") {
-                        $.cookie('token', data.Token ,{ expires: 1 });//设置有效期为一天的Cookeie
-                        window.location.href = "/Home/UploadPage";
+                        window.location.href = "/Home/ApiService?token=" + json.Token;
                     } else {
-                        window.location.href = "/swagger/ui/index?token=" + data.Token;
+                        window.location.href = "/swagger/ui/index?token=" + json.Token;
                     }
-                    
                 } else {
-                    alert(data.Message)
+                    alert(json.Message)
                 }
+            },
+            fail: function (json) {
+                alert("网络出错！")
             }
         });
-        return false;
+    });
+    //注册事件
+    $("#registerForm_Btn").on("click", function () {
+        $("#registerForm").find('input[data-validate],textarea[data-validate],select[data-validate]').trigger("blur");
+        $("#registerForm").find('input[placeholder],textarea[placeholder]').each(function () { $hideplaceholder($("#registerForm")); });
+        var numError = $("#registerForm").find('.check-error').length;
+        if (numError) {
+            $("#registerForm").find('.check-error').first().find('input[data-validate],textarea[data-validate],select[data-validate]').first().focus().select();
+            return false;
+        }
+        var userName_r = $("input[name=userName_r]").val();
+        var password_r = $("input[name=password_r]").val();
+        var userTlp_r = $("input[name=userTlp_r]").val();
+        $.ajax({
+            url: '/Home/registerUser',
+            type: 'GET',
+            async: true,
+            data: {
+                userName_r: userName_r,
+                password_r: password_r,
+                userTlp_r: userTlp_r
+            },
+            contentType: 'application/json',
+            success: function (json) {
+                alert(json.msg);
+            },
+            fail: function (json) {
+                alert("网络出错！")
+            }
+        });
     });
 
-
-   
     $('.form-reset').click(function () {
         $(this).closest('form').find(".input-help").remove();
         $(this).closest('form').find('.form-submit').removeAttr('disabled');

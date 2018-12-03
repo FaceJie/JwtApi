@@ -22,7 +22,7 @@ namespace WebApi.Content.Attributes
                 {
                     try
                     {
-                        AuthInfo json = TokenHelper.VlidateToken(token);
+                        AuthInfo json = TokenHelper<AuthInfo>.VlidateToken(token);
                         if (json != null)
                         {
                             filterContext.RequestContext.RouteData.Values.Add("token", json);

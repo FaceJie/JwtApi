@@ -16,6 +16,7 @@
 
     <!-- Bootstrap -->
     <link href="~/Content/ApiService/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/msgJs/toastr.min.css" rel="stylesheet" />
     <link href="~/Content/ApiService/css/base.css" rel="stylesheet" />
     <link href="~/Content/ApiService/css/index.css" rel="stylesheet" />
     <link href="~/Content/bootstrapTable/bootstrap-table.css" rel="stylesheet" />
@@ -37,13 +38,12 @@
             </div>
             <div class="btn-select">
                 <span class="city" id="city">成都市</span>
-                <img src="~/Content/ApiService/img/select.png" />
+               
             </div>
             <div class="header-right" id="header-right">
                 <ul>
-                    <li><a href="#">收取资料</a></li>
-                    <li><a href="#">我的订单</a></li>
-                    <li><a href="#">地址管理</a></li>
+                    <li><a href="#" onclick="redictUrl(1);">收取资料</a></li>
+                    <li><a href="#" onclick="redictUrl(2);">地址管理</a></li>
                 </ul>
             </div>
         </section>
@@ -52,8 +52,15 @@
     <div id="content" class="container-fluid">
         <div class="row">
             <section class="banner-area">
-                <div class="banner-area-btn">一键收取资料</div>
-                <div class="banner-area-desc">一键收取资料</div>
+                <div class="banner-area-btn" id="QuikeOrder">一键收取资料</div>
+                <div class="banner-area-desc">
+                    <div class="toolnav">
+                        <ul>
+                            <li><a href="#" onclick="redictUrl(1);" class="first"><span></span></a></li>
+                            <li><a href="#" onclick="redictUrl(2);" class="second"><span></span></a></li>
+                        </ul>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
@@ -240,8 +247,28 @@
             </div>
         </div>
     </div>
+
+    <!--确认下单信息-->
+    <div class="modal" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" style="" onclick="HideM" data-dismiss="modal"></button>
+                    <h4 class="modal-title">签证办理详情</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary blockquote-color" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="~/Content/ApiService/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/msgJs/toastr.min.js"></script>
     <script src="~/Content/ApiService/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="~/Content/bootstrapTable/bootstrap-table.js"></script>
     <script src="~/Content/bootstrapTable/bootstrap-table-zh-CN.js"></script>
@@ -249,12 +276,123 @@
 
     <script type="text/javascript">
         //搜索
+        
+        var token = GetQueryString("token");
         $(function () {
+            if (token == undefined || token == "" || token == null) {
+                if (confirm('非法操作，请登录授权！')) {
+                    window.location.href = "/Home/Index";
+                } else {
+                    window.location.href = "/Home/Index";
+                }
+                return;
+            } else {
+                $('input[name=token]').val(token);
+            }
+            toastr.options.positionClass = 'toast-bottom-center';
             LoadTable();
             $("#SelecteInfo").on("click", function () {
                 changesearch();
             })
+            $("#QuikeOrder").on("click", function () {
+                debugger
+                //快捷办理逻辑
+                $.ajax({
+                    url: '/VisaInfo/SelectAddresHistory',
+                    type: 'Get',
+                    data: { "token": token },
+                    contentType: 'application/json',
+                    success: function (json) {
+                        debugger
+                        if (json != "") {
+                            json = JSON.parse(json);
+                            confirms(QuikeOrder, json);
+                        } else {
+                            if (confirm('暂无历史记录，请填写收资料信息！')) {
+                                window.location.href = "/Home/Other?active=2&token=" + token;
+                            } else {
+                                window.location.href = "/Home/Other?active=2&token=" + token;
+                            }
+                            return;
+                        }
+                    },
+                    fail: function (json) {
+                        toastr.warning('网络出错！');
+                    }
+                });
+
+            })
+           
         })
+        function redictUrl(active) {
+            window.location.href = "/Home/Other?active=" + active + "&token=" + token;
+        }
+        function QuikeOrder(json) {
+            $.ajax({
+                url: '/VisaInfo/InsertInfo',
+                type: 'Get',
+                data: {
+                    "token": token,
+                    "sName": json.sName, 
+                    "sPhone": json.sPhone, 
+                    "sAddress": json.sAddress,
+                    "sPositionSet": json.sPositionSet,
+                    "rName": json.rName,
+                    "rPhone": json.rPhone,
+                    "rAddress": json.rAddress,
+                    "rPositionSet": json.rPositionSet
+                },
+                contentType: 'application/json',
+                success: function (json) {
+                    if (json.scu) {
+                        //下单成功
+                        toastr.success('下单成功！');
+                    } else {
+                        //下单失败
+                        toastr.erorr("下单失败！");
+                    }
+                },
+                fail: function (json) {
+                    toastr.warning('网络出错！');
+                }
+            });
+        }
+        function confirms(fun, params) {
+            debugger
+            if ($("#myConfirm").length > 0) {
+                $("#myConfirm").remove();
+            } 
+            var html = "<div class='modal fade' id='myConfirm'>"
+                    + "<div class='modal-backdrop in' style='opacity:0; '></div>"
+                    + "<div class='modal-dialog' style='z-index:9999; margin-top:200px; width:400px;position:fixed;left:50%;margin-left:-200px; '>"
+                    + "<div class='modal-content'>"
+                    + "<div class='modal-header'  style='font-size:16px; '>"
+                    + "<span class='glyphicon glyphicon-envelope'>&nbsp;</span>收取资料信息！<button type='button' class='close' data-dismiss='modal'>"
+                    + "<span style='font-size:20px;' class='glyphicon glyphicon-remove'></span><tton></div>"
+                    + "<div class='modal-body text-center' id='myConfirmContent' style='font-size:18px;'>"
+                    + "<blockquote> 发件人姓名：" + params.sName + "</blockquote>"
+                    + "<blockquote> 发件人电话：" + params.sPhone + "</blockquote>"
+                    + "<blockquote> 发件人地址：" + params.sAddress + "</blockquote>"
+                    + "<blockquote> 收件人姓名：" + params.rName + "</blockquote>"
+                    + "<blockquote> 收件人电话：" + params.rPhone + "</blockquote>"
+                    + "<blockquote> 收件人地址：" + params.rAddress + "</blockquote>"
+                    + "</div>"
+                    + "<div class='modal-footer ' style=''>"
+                    + "<button class='btn btn-danger ' id='confirmOk' >确定<tton>"
+                    + "<button class='btn btn-info ' data-dismiss='modal'>取消<tton>"
+                    + "</div>" + "</div></div></div>";
+            $("body").append(html);
+            $("#myConfirm").modal("show");
+            $("#confirmOk").on("click", function() {
+                $("#myConfirm").modal("hide");
+                fun(params); // 执行函数
+            });
+        }
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
         function HideM() {
             $("#mymodal-data").modal({
                 show: false

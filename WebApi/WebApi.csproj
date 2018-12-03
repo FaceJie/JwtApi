@@ -53,6 +53,9 @@
       <HintPath>..\packages\JWT.4.0.0\lib\net46\JWT.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\Project\WXService\WXAPPUlits\bin\Debug\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -60,10 +63,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
@@ -150,7 +149,11 @@
     <Content Include="Content\ApiService\img\bg.png" />
     <Content Include="Content\ApiService\img\easygo.png" />
     <Content Include="Content\ApiService\img\logo.jpg" />
+    <Content Include="Content\ApiService\img\order-inner-bg.png" />
     <Content Include="Content\ApiService\img\select.png" />
+    <Content Include="Content\ApiService\img\jj.png" />
+    <Content Include="Content\ApiService\img\dz.png" />
+    <Content Include="Content\ApiService\img\dd.png" />
     <Content Include="Content\ApiService\js\html5shiv.min.js" />
     <Content Include="Content\ApiService\js\jquery-3.3.1.min.js" />
     <Content Include="Content\ApiService\js\respond.min.js" />
@@ -2662,6 +2665,8 @@
     <Content Include="Content\miniui\scripts\miniui\themes\pure\images\window\header.gif" />
     <Content Include="Content\miniui\scripts\miniui\themes\pure\skin.css" />
     <Content Include="Content\miniui\scripts\tongji.js" />
+    <Content Include="Content\msgJs\toastr.min.css" />
+    <Content Include="Content\msgJs\toastr.min.js" />
     <Content Include="Content\Site.css" />
     <EmbeddedResource Include="Content\UserSource\css\site.css" />
     <EmbeddedResource Include="Content\UserSource\js\site.js" />
@@ -2728,7 +2733,10 @@
     <Content Include="Content\ApiService\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\ApiService\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\ApiService\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="App_Data\log4net.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrapValidator.css" />
+    <Content Include="Scripts\bootstrapValidator.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -2763,8 +2771,8 @@
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\LoginResult.cs" />
-    <Compile Include="Models\MsgModel.cs" />
     <Compile Include="Models\ViewModel\VisaIndoViewModel.cs" />
+    <Compile Include="Models\VisaLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2780,6 +2788,7 @@
     <Content Include="Views\Home\UpLoadPage.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Home\ApiService.cshtml" />
+    <Content Include="Views\Home\Other.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2788,7 +2797,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\miniui\scripts\miniui\themes\gray\images\layout\" />
     <Folder Include="Content\miniui\scripts\miniui\themes\gray\images\panel\" />
     <Folder Include="Content\miniui\scripts\miniui\themes\gray\images\splitter\" />

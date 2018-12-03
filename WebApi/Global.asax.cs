@@ -20,6 +20,10 @@ namespace WebApi
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
+            //日志
+            System.IO.FileInfo fileinfo = new System.IO.FileInfo(Server.MapPath("~/App_Data/log4net.Config"));
+            log4net.Config.XmlConfigurator.Configure(fileinfo);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }

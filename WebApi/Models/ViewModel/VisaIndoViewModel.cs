@@ -13,7 +13,7 @@ namespace WebApi.Models.ViewModel
     {
         /// <summary>
         ///团号
-        /// </summary>]
+        /// </summary>
         public string GroupNo { get; set; }
         /// <summary>
         /// 实际送签时间

@@ -65,7 +65,7 @@
 }
 
 .header .header-in .header-right {
-    width: 390px;
+    width: 260px;
     height: 40px;
     position: relative;
     margin-top: -20px;
@@ -74,7 +74,7 @@
 }
 
 .header-right ul {
-    width: 390px;
+    width: 260px;
     height: 40px;
     line-height: 40px;
 }
@@ -117,37 +117,154 @@
 }
 
     .banner-area .banner-area-desc {
-        content: "dasdasda";
         display: inline-block;
         position: absolute;
         left: 50%;
         top: 50%;
         width: 300px;
-        height: 90px;
+        height: 120px;
         margin-left: -150px;
         margin-top: 45px;
         line-height: 90px;
-        background: #fd9f30;
+    }
+/*快捷导航*/
+.toolnav, .toolnav ul {
+    width: 300px;
+    height: 120px;
+    background:red;
+}
+
+    .toolnav ul li {
+        list-style: none;
+        width: 150px;
+        height: 120px;
+        float: left;
+        background-color: #E4F6FA;
     }
 
-    .banner-area .banner-area-btn {
-        display: inline-block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -80px;
-        margin-top: -20px;
-        width: 160px;
-        height: 40px;
-        text-align: center;
-        line-height: 40px;
-        background: #fd9f30;
-        color: #fff;
-        cursor: pointer;
-        font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, Verdana, sans-serif, "WenQuanYi Micro Hei", "\5B8B\4F53";
-        font-size: 20px;
-        border-radius: 8px;
-    }
+        .toolnav ul li a {
+            display: inline-block;
+            width: 105px;
+            height: 60px;
+            margin-left: 23px;
+            margin-top: 30px;
+        }
+
+        .toolnav ul li:nth-child(1) a {
+            background: #50E785;
+        }
+
+        .toolnav ul li:nth-child(2) a {
+            background: #4EAEFF;
+        }
+
+        .toolnav ul li:nth-child(3) a {
+            background: #FFCA4B;
+        }
+
+        .toolnav ul li a span {
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            width: 60px;
+            height: 60px;
+            margin-top: -30px;
+            margin-left: -83px;
+            border-radius: 50%;
+            z-index: 999;
+            -webkit-transition: -webkit-transform 0.6s ease-out;
+            -moz-transition: -moz-transform 0.6s ease-out;
+            -o-transition: -o-transform 0.6s ease-out;
+            -ms-transition: -ms-transform 0.6s ease-out;
+        }
+
+        .toolnav ul li:nth-child(1) a span {
+            background: url("../img/jj.png") no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .toolnav ul li:nth-child(2) a span {
+            background: url("../img/dd.png") no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .toolnav ul li:nth-child(3) a span {
+            background: url("../img/dz.png") no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+
+
+        .toolnav ul li a span:hover {
+            -webkit-transform: rotateZ(360deg) scale(1.3,1.3);
+            -moz-transform: rotateZ(360deg) scale(1.3,1.3);
+            -o-transform: rotateZ(360deg) scale(1.3,1.3);
+            -ms-transform: rotateZ(360deg) scale(1.3,1.3);
+            transform: rotateZ(360deg) scale(1.3,1.3);
+        }
+
+        .toolnav ul li:nth-child(1) a::before {
+            background: #50E785;
+        }
+
+        .toolnav ul li:nth-child(1) a::after {
+            background: #50E785;
+        }
+
+        .toolnav ul li:nth-child(2) a::before {
+            background: #4EAEFF;
+        }
+
+        .toolnav ul li:nth-child(2) a::after {
+            background: #4EAEFF;
+        }
+
+        .toolnav ul li:nth-child(3) a::before {
+            background: #FFCA4B;
+        }
+
+        .toolnav ul li:nth-child(3) a::after {
+            background: #FFCA4B;
+        }
+
+        .toolnav ul li a::before {
+            position: relative;
+            content: "";
+            display: inline-block;
+            width: 105px;
+            height: 60px;
+            transform: rotate(60deg) translate(0px,0px);
+        }
+
+        .toolnav ul li a::after {
+            content: "";
+            display: inline-block;
+            width: 105px;
+            height: 60px;
+            transform: translate(0px,-100px) rotate(120deg);
+        }
+/**快捷导航*/
+.banner-area .banner-area-btn {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -80px;
+    margin-top: -20px;
+    width: 160px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background: #fd9f30;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, Verdana, sans-serif, "WenQuanYi Micro Hei", "\5B8B\4F53";
+    font-size: 20px;
+    border-radius: 8px;
+}
 /*广告区域*/
 .advertising-area {
     width: 100%;
@@ -234,7 +351,7 @@
         font-weight: 400;
         letter-spacing: -0.04em;
         line-height: 1;
-        margin:10px 0 20px;
+        margin: 10px 0 20px;
         text-transform: none;
     }
 
@@ -321,7 +438,7 @@ blockquote {
     background-color: #0ae !important;
 }
 /*页面小细节*/
-.button{
+.button {
     border: solid 1px #ddd;
     background: transparent;
     border-radius: 4px;
@@ -335,11 +452,12 @@ blockquote {
     color: #e33;
 }
 
-.button:hover{
-    background:#e33;
-    color: white;
-    text-decoration: none;
-}
+    .button:hover {
+        background: #e33;
+        color: white;
+        text-decoration: none;
+    }
+
 .control-label {
     text-align: left !important;
 }
@@ -574,4 +692,242 @@ blockquote {
 
 .hot-page2-hom-pre-2 {
     width: 80%;
+}
+
+
+.form-header {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 160px;
+    background: url(../img/order-inner-bg.png) no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+    .form-header .row {
+        position: relative;
+    }
+
+.form-header-in-left {
+    position: absolute;
+    width: 100px;
+    height: 38px;
+    left: 0;
+    top: 59px;
+    line-height: 38px;
+    background: url("../img/easygo.png") no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.form-header-in-right {
+    position: absolute;
+    display:inline-block;
+    line-height:40px;
+    width: 100px;
+    height: 40px;
+    right: 0;
+    top: 60px;
+    text-align:center;
+    cursor:pointer;
+    color:white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.form-area {
+    width: 100%;
+    height: 850px;
+    max-height: 850px;
+    border-bottom: 3px #3498db solid;
+}
+
+.nav-tabs {
+    background: #fafafa;
+    border-bottom: 3px #3498db solid;
+}
+
+    .nav-tabs li a {
+        width: 120px;
+        line-height: 1.5;
+        border: 1px #ddd solid;
+        margin-right: -1px;
+        color: #999;
+        text-align: center;
+        border-radius: 0;
+        font-size: 14px;
+    }
+
+        .nav-tabs li a .glyphicon-remove-sign:hover {
+            color: red;
+            cursor: pointer;
+        }
+
+        .nav-tabs li a i:first-child {
+            margin-right: 3px;
+        }
+
+    .nav-tabs .active a {
+        border-top: solid 2px #3498db !important;
+        background: #3498db !important;
+        color: #fff !important;
+    }
+
+#myTabContent {
+    position: relative;
+    background: #fff !important;
+    height: 94%;
+    max-height: 94%;
+}
+
+.form-head-line {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.form-head-line-left {
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.form-head-line-right {
+    width: 90%;
+    height: 1px;
+    background: #0085FF;
+}
+
+.form-send {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 14px;
+}
+
+.form-recive {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 14px;
+}
+
+    .form-send .control-label, .form-recive .control-label {
+        text-align: right !important;
+        font-weight: 100;
+    }
+
+/*.form-send .yl, .form-recive .yl{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 200px;
+            height: 200px;
+            background: red;
+        }*/
+#sqzl {
+    width: 800px;
+    height: 700px;
+    max-height:750px;
+    border: 1px solid #3498db;
+    padding: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -400px;
+    margin-top: -375px;
+    box-sizing: border-box;
+}
+
+#dzgl {
+     width: 800px;
+    height: 700px;
+    max-height:750px;
+    border: 1px solid #3498db;
+    padding: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -400px;
+    margin-top: -375px;
+    box-sizing: border-box;
+}
+
+    #dzgl .client_address {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        background:#E4F6FA;
+        border-radius:5px;
+        margin-bottom:5px;
+    }
+
+.client_address .client_address-start {
+    width: 700px;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+    .client_address .client_address-start .client_address-start-info {
+        width: 550px;
+        height: 35px;
+    }
+
+    .client_address .client_address-start .client_address-start-btn {
+        width: 100px;
+        height: 35px;
+    }
+
+.client_address .client_address-end {
+    width: 700px;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+    .client_address .client_address-end .client_address-start-info {
+        width: 550px;
+        height: 35px;
+    }
+
+    .client_address .client_address-end .client_address-start-btn {
+        width: 100px;
+        height: 35px;
+    }
+
+.client_address-start-info {
+    display:inline-block;
+    line-height:35px;
+    max-width: 550px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.client_address-start-btn button, .client_address-start-btn button {
+    width: 100%;
+    height: 35px;
 }
